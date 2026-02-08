@@ -386,7 +386,7 @@
           <text x="270" y="193" text-anchor="middle" fill="#2471A3" font-weight="600" font-size="13" font-family="Source Sans 3, sans-serif">Ordinal</text>
           <text x="270" y="222" text-anchor="middle" fill="#5D6D7E" font-size="11.5" font-family="Source Sans 3, sans-serif">Has a meaningful order</text>
           <rect x="200" y="240" width="140" height="60" rx="6" fill="#F8F9FA" stroke="#D5DBDB" stroke-width="1"/>
-          <text x="270" y="258" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Sans 3, sans-serif"> Education: primary → secondary → tertiary</text>
+          <text x="270" y="258" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Sans 3, sans-serif"> Education: secondary → college</text>
           <text x="270" y="292" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Sans 3, sans-serif"> Rating: low, mid, high</text>
 
           <!-- Discrete -->
@@ -520,12 +520,66 @@
           <text x="570" y="407" text-anchor="middle" fill="#5D6D7E" font-size="11.5" font-family="Source Sans 3, sans-serif">All values are roughly equally common.</text>
           <text x="570" y="422" text-anchor="middle" fill="#5D6D7E" font-size="11.5" font-family="Source Sans 3, sans-serif">Mean ≈ median. e.g. day of month</text>
 
-          <!-- SKEWNESS SCALE -->
-          <g transform="translate(80,450)">
-            <rect x="0" y="0" width="600" height="55" rx="8" fill="#FEF9E7" stroke="#F1C40F" stroke-width="1.5"/>
-            <text x="300" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#7D6608" font-family="Source Sans 3, sans-serif">Measuring skewness</text>
-            <text x="300" y="35" text-anchor="middle" font-size="11" fill="#7D6608" font-family="Source Sans 3, sans-serif">skewness ≈ 0 → symmetric | skewness > 0 → right-skewed | skewness < 0 → left-skewed</text>
-            <text x="300" y="49" text-anchor="middle" font-size="11" fill="#7D6608" font-family="Source Sans 3, sans-serif">|skewness| > 1 is "highly skewed" · |skewness| > 0.5 is "moderately skewed"</text>
+          <!-- SKEWNESS SCALE — visual number line -->
+          <g transform="translate(45,445)">
+            <text x="335" y="12" text-anchor="middle" font-size="13" font-weight="700" fill="#682773" font-family="Source Sans 3, sans-serif">How to read a skewness value</text>
+
+            <!-- Background zones -->
+            <!-- Highly left-skewed -->
+            <rect x="30" y="25" width="110" height="38" rx="4" fill="#E74C3C" opacity="0.15"/>
+            <!-- Moderately left-skewed -->
+            <rect x="140" y="25" width="90" height="38" rx="4" fill="#E67E22" opacity="0.15"/>
+            <!-- Roughly symmetric -->
+            <rect x="230" y="25" width="210" height="38" rx="4" fill="#27AE60" opacity="0.15"/>
+            <!-- Moderately right-skewed -->
+            <rect x="440" y="25" width="90" height="38" rx="4" fill="#E67E22" opacity="0.15"/>
+            <!-- Highly right-skewed -->
+            <rect x="530" y="25" width="110" height="38" rx="4" fill="#E74C3C" opacity="0.15"/>
+
+            <!-- Number line -->
+            <line x1="30" y1="55" x2="640" y2="55" stroke="#AAB7B8" stroke-width="2"/>
+
+            <!-- Tick marks and values -->
+            <line x1="30" y1="50" x2="30" y2="60" stroke="#2C3E50" stroke-width="1.5"/>
+            <text x="30" y="75" text-anchor="middle" fill="#2C3E50" font-size="11" font-weight="600" font-family="Source Sans 3, sans-serif">−2</text>
+
+            <line x1="140" y1="50" x2="140" y2="60" stroke="#2C3E50" stroke-width="1.5"/>
+            <text x="140" y="75" text-anchor="middle" fill="#2C3E50" font-size="11" font-weight="600" font-family="Source Sans 3, sans-serif">−1</text>
+
+            <line x1="230" y1="50" x2="230" y2="60" stroke="#2C3E50" stroke-width="1.5"/>
+            <text x="230" y="75" text-anchor="middle" fill="#2C3E50" font-size="11" font-weight="600" font-family="Source Sans 3, sans-serif">−0.5</text>
+
+            <line x1="335" y1="48" x2="335" y2="62" stroke="#682773" stroke-width="2.5"/>
+            <text x="335" y="75" text-anchor="middle" fill="#682773" font-size="11" font-weight="700" font-family="Source Sans 3, sans-serif">0</text>
+
+            <line x1="440" y1="50" x2="440" y2="60" stroke="#2C3E50" stroke-width="1.5"/>
+            <text x="440" y="75" text-anchor="middle" fill="#2C3E50" font-size="11" font-weight="600" font-family="Source Sans 3, sans-serif">+0.5</text>
+
+            <line x1="530" y1="50" x2="530" y2="60" stroke="#2C3E50" stroke-width="1.5"/>
+            <text x="530" y="75" text-anchor="middle" fill="#2C3E50" font-size="11" font-weight="600" font-family="Source Sans 3, sans-serif">+1</text>
+
+            <line x1="640" y1="50" x2="640" y2="60" stroke="#2C3E50" stroke-width="1.5"/>
+            <text x="640" y="75" text-anchor="middle" fill="#2C3E50" font-size="11" font-weight="600" font-family="Source Sans 3, sans-serif">+2</text>
+
+            <!-- Zone labels -->
+            <text x="85" y="42" text-anchor="middle" fill="#C0392B" font-size="10" font-weight="600" font-family="Source Sans 3, sans-serif">Highly</text>
+            <text x="85" y="52" text-anchor="middle" fill="#C0392B" font-size="10" font-weight="600" font-family="Source Sans 3, sans-serif">left-skewed</text>
+
+            <text x="185" y="42" text-anchor="middle" fill="#D35400" font-size="10" font-weight="600" font-family="Source Sans 3, sans-serif">Moderately</text>
+            <text x="185" y="52" text-anchor="middle" fill="#D35400" font-size="10" font-weight="600" font-family="Source Sans 3, sans-serif">left-skewed</text>
+
+            <text x="335" y="40" text-anchor="middle" fill="#1E8449" font-size="11" font-weight="700" font-family="Source Sans 3, sans-serif">Roughly</text>
+            <text x="335" y="52" text-anchor="middle" fill="#1E8449" font-size="11" font-weight="700" font-family="Source Sans 3, sans-serif">symmetric</text>
+
+            <text x="485" y="42" text-anchor="middle" fill="#D35400" font-size="10" font-weight="600" font-family="Source Sans 3, sans-serif">Moderately</text>
+            <text x="485" y="52" text-anchor="middle" fill="#D35400" font-size="10" font-weight="600" font-family="Source Sans 3, sans-serif">right-skewed</text>
+
+            <text x="585" y="42" text-anchor="middle" fill="#C0392B" font-size="10" font-weight="600" font-family="Source Sans 3, sans-serif">Highly</text>
+            <text x="585" y="52" text-anchor="middle" fill="#C0392B" font-size="10" font-weight="600" font-family="Source Sans 3, sans-serif">right-skewed</text>
+
+            <!-- Direction arrows -->
+            <text x="85" y="90" text-anchor="middle" fill="#7F8C8D" font-size="10" font-family="Source Sans 3, sans-serif">← long left tail</text>
+            <text x="585" y="90" text-anchor="middle" fill="#7F8C8D" font-size="10" font-family="Source Sans 3, sans-serif">long right tail →</text>
           </g>
         </svg>
       </div>
