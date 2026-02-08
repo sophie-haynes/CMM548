@@ -850,12 +850,12 @@
 
       <table>
         <tr><th>Algorithm</th><th>Needs scaling?</th><th>Why</th></tr>
-        <tr><td>k-NN</td><td>✅ Yes — essential</td><td>Uses distances; large features dominate</td></tr>
-        <tr><td>SVM</td><td>✅ Yes — essential</td><td>Optimises margin using distances</td></tr>
-        <tr><td>Logistic Regression</td><td>⚠️ Recommended</td><td>Gradient descent converges faster</td></tr>
-        <tr><td>Naive Bayes</td><td>❌ No</td><td>Uses probabilities, not distances</td></tr>
-        <tr><td>Decision Tree</td><td>❌ No</td><td>Splits on thresholds; scale doesn't matter</td></tr>
-        <tr><td>Random Forest / XGBoost</td><td>❌ No</td><td>Tree-based; inherits decision tree properties</td></tr>
+        <tr><td>k-NN</td><td> Yes (essential)</td><td>Uses distances; large features dominate</td></tr>
+        <tr><td>SVM</td><td> Yes (essential)</td><td>Optimises margin using distances</td></tr>
+        <tr><td>Logistic Regression</td><td> Recommended</td><td>Gradient descent converges faster</td></tr>
+        <tr><td>Naive Bayes</td><td> No</td><td>Uses probabilities, not distances</td></tr>
+        <tr><td>Decision Tree</td><td> No</td><td>Splits on thresholds; scale doesn't matter</td></tr>
+        <tr><td>Random Forest / XGBoost</td><td> No</td><td>Tree-based; inherits decision tree properties</td></tr>
       </table>
     </div>
   </div>
