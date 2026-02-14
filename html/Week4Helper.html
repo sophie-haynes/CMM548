@@ -323,22 +323,107 @@
   <div class="toc">
     <h3>Contents</h3>
     <div class="toc-grid">
-      <a href="#s1"><span class="num">1</span> Imputation</a>
-      <a href="#s2"><span class="num">2</span> One-Hot Encoding</a>
-      <a href="#s3"><span class="num">3</span> Ordinal Encoding</a>
-      <a href="#s4"><span class="num">4</span> Feature Scaling</a>
-      <a href="#s5"><span class="num">5</span> SMOTE</a>
-      <a href="#s6"><span class="num">6</span> Data Leakage</a>
-      <a href="#s7"><span class="num">7</span> Pipelines &amp; ColumnTransformer</a>
-      <a href="#s8"><span class="num">8</span> Quick Reference Table</a>
+      <a href="#s1"><span class="num">1</span> Feature Types</a>
+      <a href="#s2"><span class="num">2</span> Imputation</a>
+      <a href="#s3"><span class="num">3</span> One-Hot Encoding</a>
+      <a href="#s4"><span class="num">4</span> Ordinal Encoding</a>
+      <a href="#s5"><span class="num">5</span> Feature Scaling</a>
+      <a href="#s6"><span class="num">6</span> SMOTE</a>
+      <a href="#s7"><span class="num">7</span> Data Leakage</a>
+      <a href="#s8"><span class="num">8</span> Pipelines &amp; ColumnTransformer</a>
+      <a href="#s9"><span class="num">9</span> Quick Reference Table</a>
     </div>
   </div>
 
 
-  <!-- ==================== 1. IMPUTATION ==================== -->
+  <!-- ==================== 1. FEATURE TYPES ==================== -->
   <div class="concept" id="s1">
     <div class="concept-header">
       <div class="concept-num">1</div>
+      <h2>Feature Types</h2>
+    </div>
+    <div class="concept-body">
+      <p>Before you can preprocess your data, you need to know what <strong>type</strong> each feature is. The type determines which preprocessing steps are appropriate. There are three main types you'll work with.</p>
+
+      <div class="visual-panel">
+        <svg viewBox="0 0 740 340" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;">
+          <text x="370" y="24" text-anchor="middle" fill="#682773" font-weight="700" font-size="15" font-family="Source Sans 3, sans-serif">The Three Feature Types (with Bank Marketing examples)</text>
+
+          <!-- NUMERICAL -->
+          <rect x="30" y="50" width="210" height="265" rx="10" fill="#EBF5FB" stroke="#2980B9" stroke-width="2"/>
+          <rect x="30" y="50" width="210" height="38" rx="10" fill="#2980B9"/>
+          <rect x="30" y="72" width="210" height="16" fill="#2980B9"/>
+          <text x="135" y="75" text-anchor="middle" fill="white" font-weight="700" font-size="14" font-family="Source Sans 3, sans-serif">Numerical</text>
+
+          <text x="135" y="110" text-anchor="middle" fill="#1A5276" font-weight="600" font-size="12" font-family="Source Sans 3, sans-serif">Numbers you can do maths with.</text>
+          <text x="135" y="128" text-anchor="middle" fill="#1A5276" font-size="11" font-family="Source Sans 3, sans-serif">Differences between values are</text>
+          <text x="135" y="142" text-anchor="middle" fill="#1A5276" font-size="11" font-family="Source Sans 3, sans-serif">meaningful (e.g. age 40 is 10 more</text>
+          <text x="135" y="156" text-anchor="middle" fill="#1A5276" font-size="11" font-family="Source Sans 3, sans-serif">than age 30).</text>
+
+          <text x="135" y="182" text-anchor="middle" fill="#1A5276" font-weight="700" font-size="11" font-family="Source Sans 3, sans-serif">Examples:</text>
+          <text x="135" y="200" text-anchor="middle" fill="#2C3E50" font-size="12" font-family="Source Code Pro, monospace">age</text>
+          <text x="135" y="218" text-anchor="middle" fill="#5D6D7E" font-size="10" font-family="Source Sans 3, sans-serif">18, 33, 57, 42...</text>
+          <text x="135" y="240" text-anchor="middle" fill="#2C3E50" font-size="12" font-family="Source Code Pro, monospace">balance</text>
+          <text x="135" y="258" text-anchor="middle" fill="#5D6D7E" font-size="10" font-family="Source Sans 3, sans-serif">-102, 449, 1362, 8020...</text>
+
+          <rect x="55" y="278" width="160" height="26" rx="5" fill="white" stroke="#2980B9" stroke-width="1"/>
+          <text x="135" y="296" text-anchor="middle" fill="#1A5276" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">→ Scale, impute with median</text>
+
+          <!-- ORDINAL -->
+          <rect x="265" y="50" width="210" height="265" rx="10" fill="#FEF5EC" stroke="#E67E22" stroke-width="2"/>
+          <rect x="265" y="50" width="210" height="38" rx="10" fill="#E67E22"/>
+          <rect x="265" y="72" width="210" height="16" fill="#E67E22"/>
+          <text x="370" y="75" text-anchor="middle" fill="white" font-weight="700" font-size="14" font-family="Source Sans 3, sans-serif">Ordinal (categorical)</text>
+
+          <text x="370" y="110" text-anchor="middle" fill="#B7600A" font-weight="600" font-size="12" font-family="Source Sans 3, sans-serif">Categories with a natural order.</text>
+          <text x="370" y="128" text-anchor="middle" fill="#B7600A" font-size="11" font-family="Source Sans 3, sans-serif">There's a ranking between values,</text>
+          <text x="370" y="142" text-anchor="middle" fill="#B7600A" font-size="11" font-family="Source Sans 3, sans-serif">but the gaps between them may</text>
+          <text x="370" y="156" text-anchor="middle" fill="#B7600A" font-size="11" font-family="Source Sans 3, sans-serif">not be equal.</text>
+
+          <text x="370" y="182" text-anchor="middle" fill="#B7600A" font-weight="700" font-size="11" font-family="Source Sans 3, sans-serif">Examples:</text>
+          <text x="370" y="200" text-anchor="middle" fill="#2C3E50" font-size="12" font-family="Source Code Pro, monospace">education</text>
+          <text x="370" y="218" text-anchor="middle" fill="#5D6D7E" font-size="10" font-family="Source Sans 3, sans-serif">primary → secondary → tertiary</text>
+
+          <rect x="290" y="278" width="160" height="26" rx="5" fill="white" stroke="#E67E22" stroke-width="1"/>
+          <text x="370" y="296" text-anchor="middle" fill="#B7600A" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">→ Ordinal encode (0, 1, 2)</text>
+
+          <!-- NOMINAL -->
+          <rect x="500" y="50" width="210" height="265" rx="10" fill="#EAFAF1" stroke="#27AE60" stroke-width="2"/>
+          <rect x="500" y="50" width="210" height="38" rx="10" fill="#27AE60"/>
+          <rect x="500" y="72" width="210" height="16" fill="#27AE60"/>
+          <text x="605" y="75" text-anchor="middle" fill="white" font-weight="700" font-size="14" font-family="Source Sans 3, sans-serif">Nominal (categorical)</text>
+
+          <text x="605" y="110" text-anchor="middle" fill="#1E8449" font-weight="600" font-size="12" font-family="Source Sans 3, sans-serif">Categories with no order.</text>
+          <text x="605" y="128" text-anchor="middle" fill="#1E8449" font-size="11" font-family="Source Sans 3, sans-serif">The values are just labels. There's</text>
+          <text x="605" y="142" text-anchor="middle" fill="#1E8449" font-size="11" font-family="Source Sans 3, sans-serif">no sense in which one is "higher"</text>
+          <text x="605" y="156" text-anchor="middle" fill="#1E8449" font-size="11" font-family="Source Sans 3, sans-serif">or "more" than another.</text>
+
+          <text x="605" y="182" text-anchor="middle" fill="#1E8449" font-weight="700" font-size="11" font-family="Source Sans 3, sans-serif">Examples:</text>
+          <text x="605" y="200" text-anchor="middle" fill="#2C3E50" font-size="12" font-family="Source Code Pro, monospace">job</text>
+          <text x="605" y="218" text-anchor="middle" fill="#5D6D7E" font-size="10" font-family="Source Sans 3, sans-serif">admin, technician, student...</text>
+          <text x="605" y="240" text-anchor="middle" fill="#2C3E50" font-size="12" font-family="Source Code Pro, monospace">marital</text>
+          <text x="605" y="258" text-anchor="middle" fill="#5D6D7E" font-size="10" font-family="Source Sans 3, sans-serif">married, single, divorced</text>
+
+          <rect x="525" y="278" width="160" height="26" rx="5" fill="white" stroke="#27AE60" stroke-width="1"/>
+          <text x="605" y="296" text-anchor="middle" fill="#1E8449" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">→ One-hot encode</text>
+        </svg>
+      </div>
+
+      <div class="warning">
+        <strong>Why this matters:</strong> Using the wrong preprocessing for a feature type can mislead your model. If you ordinal-encode a nominal feature like <code>job</code>, the model will think "management" (5) is somehow "more" than "admin" (0). If you one-hot encode an ordinal feature like <code>education</code>, you lose the information that tertiary > secondary > primary.
+      </div>
+
+      <div class="info">
+        <strong>How to identify the type:</strong> Look at the values. Can you do maths with them (add, subtract, average)? It's numerical. Are they categories with a clear ranking? Ordinal. Categories with no ranking? Nominal. Some features need judgement, so always justify your choice.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== 2. IMPUTATION ==================== -->
+  <div class="concept" id="s2">
+    <div class="concept-header">
+      <div class="concept-num">2</div>
       <h2>Imputation</h2>
     </div>
     <div class="concept-body">
@@ -405,6 +490,105 @@
         </svg>
       </div>
 
+      <!-- Before/after imputation visuals -->
+      <div class="grid-2">
+        <div class="visual-panel" style="padding:0.8rem;">
+          <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg" style="max-width:300px;">
+            <text x="160" y="18" text-anchor="middle" fill="#2980B9" font-weight="700" font-size="13" font-family="Source Sans 3, sans-serif">Median Imputation (numerical)</text>
+
+            <!-- Before column -->
+            <text x="80" y="42" text-anchor="middle" fill="#5D6D7E" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">Before</text>
+            <rect x="30" y="50" width="100" height="24" rx="3" fill="#682773"/>
+            <text x="80" y="67" text-anchor="middle" fill="white" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">balance</text>
+            <rect x="30" y="74" width="100" height="22" fill="#EBF5FB" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="80" y="89" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">1200</text>
+            <rect x="30" y="96" width="100" height="22" fill="white" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="80" y="111" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">350</text>
+            <rect x="30" y="118" width="100" height="22" fill="#FDEDEC" stroke="#E74C3C" stroke-width="1.5"/>
+            <text x="80" y="133" text-anchor="middle" fill="#E74C3C" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">NaN</text>
+            <rect x="30" y="140" width="100" height="22" fill="white" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="80" y="155" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">449</text>
+            <rect x="30" y="162" width="100" height="22" fill="#EBF5FB" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="80" y="177" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">8020</text>
+            <rect x="30" y="184" width="100" height="22" fill="#FDEDEC" stroke="#E74C3C" stroke-width="1.5"/>
+            <text x="80" y="199" text-anchor="middle" fill="#E74C3C" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">NaN</text>
+
+            <!-- Arrow -->
+            <text x="160" y="145" text-anchor="middle" fill="#682773" font-size="18">→</text>
+
+            <!-- After column -->
+            <text x="240" y="42" text-anchor="middle" fill="#5D6D7E" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">After</text>
+            <rect x="190" y="50" width="100" height="24" rx="3" fill="#682773"/>
+            <text x="240" y="67" text-anchor="middle" fill="white" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">balance</text>
+            <rect x="190" y="74" width="100" height="22" fill="#EBF5FB" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="240" y="89" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">1200</text>
+            <rect x="190" y="96" width="100" height="22" fill="white" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="240" y="111" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">350</text>
+            <rect x="190" y="118" width="100" height="22" fill="#EBF5FB" stroke="#2980B9" stroke-width="1.5"/>
+            <text x="240" y="133" text-anchor="middle" fill="#2980B9" font-weight="700" font-size="11" font-family="Source Code Pro, monospace">449</text>
+            <rect x="190" y="140" width="100" height="22" fill="white" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="240" y="155" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">449</text>
+            <rect x="190" y="162" width="100" height="22" fill="#EBF5FB" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="240" y="177" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">8020</text>
+            <rect x="190" y="184" width="100" height="22" fill="#EBF5FB" stroke="#2980B9" stroke-width="1.5"/>
+            <text x="240" y="199" text-anchor="middle" fill="#2980B9" font-weight="700" font-size="11" font-family="Source Code Pro, monospace">449</text>
+
+            <!-- Explanation -->
+            <rect x="30" y="222" width="260" height="48" rx="6" fill="#EBF5FB" stroke="#2980B9" stroke-width="1"/>
+            <text x="160" y="240" text-anchor="middle" fill="#1A5276" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">Sorted values: 350, 449, 1200, 8020</text>
+            <text x="160" y="258" text-anchor="middle" fill="#1A5276" font-size="11" font-family="Source Sans 3, sans-serif">Median = middle value = <tspan font-weight="700">449</tspan></text>
+          </svg>
+        </div>
+
+        <div class="visual-panel" style="padding:0.8rem;">
+          <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg" style="max-width:300px;">
+            <text x="160" y="18" text-anchor="middle" fill="#27AE60" font-weight="700" font-size="13" font-family="Source Sans 3, sans-serif">Mode Imputation (categorical)</text>
+
+            <!-- Before column -->
+            <text x="80" y="42" text-anchor="middle" fill="#5D6D7E" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">Before</text>
+            <rect x="30" y="50" width="100" height="24" rx="3" fill="#682773"/>
+            <text x="80" y="67" text-anchor="middle" fill="white" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">job</text>
+            <rect x="30" y="74" width="100" height="22" fill="#EAFAF1" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="80" y="89" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">admin</text>
+            <rect x="30" y="96" width="100" height="22" fill="white" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="80" y="111" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">admin</text>
+            <rect x="30" y="118" width="100" height="22" fill="#FDEDEC" stroke="#E74C3C" stroke-width="1.5"/>
+            <text x="80" y="133" text-anchor="middle" fill="#E74C3C" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">NaN</text>
+            <rect x="30" y="140" width="100" height="22" fill="white" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="80" y="155" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">student</text>
+            <rect x="30" y="162" width="100" height="22" fill="#EAFAF1" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="80" y="177" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">admin</text>
+            <rect x="30" y="184" width="100" height="22" fill="#FDEDEC" stroke="#E74C3C" stroke-width="1.5"/>
+            <text x="80" y="199" text-anchor="middle" fill="#E74C3C" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">NaN</text>
+
+            <!-- Arrow -->
+            <text x="160" y="145" text-anchor="middle" fill="#682773" font-size="18">→</text>
+
+            <!-- After column -->
+            <text x="240" y="42" text-anchor="middle" fill="#5D6D7E" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">After</text>
+            <rect x="190" y="50" width="100" height="24" rx="3" fill="#682773"/>
+            <text x="240" y="67" text-anchor="middle" fill="white" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">job</text>
+            <rect x="190" y="74" width="100" height="22" fill="#EAFAF1" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="240" y="89" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">admin</text>
+            <rect x="190" y="96" width="100" height="22" fill="white" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="240" y="111" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">admin</text>
+            <rect x="190" y="118" width="100" height="22" fill="#EAFAF1" stroke="#27AE60" stroke-width="1.5"/>
+            <text x="240" y="133" text-anchor="middle" fill="#27AE60" font-weight="700" font-size="11" font-family="Source Code Pro, monospace">admin</text>
+            <rect x="190" y="140" width="100" height="22" fill="white" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="240" y="155" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">student</text>
+            <rect x="190" y="162" width="100" height="22" fill="#EAFAF1" stroke="#E8E8E8" stroke-width="1"/>
+            <text x="240" y="177" text-anchor="middle" fill="#2C3E50" font-size="11" font-family="Source Code Pro, monospace">admin</text>
+            <rect x="190" y="184" width="100" height="22" fill="#EAFAF1" stroke="#27AE60" stroke-width="1.5"/>
+            <text x="240" y="199" text-anchor="middle" fill="#27AE60" font-weight="700" font-size="11" font-family="Source Code Pro, monospace">admin</text>
+
+            <!-- Explanation -->
+            <rect x="30" y="222" width="260" height="48" rx="6" fill="#EAFAF1" stroke="#27AE60" stroke-width="1"/>
+            <text x="160" y="240" text-anchor="middle" fill="#1E8449" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">Counts: admin (3), student (1)</text>
+            <text x="160" y="258" text-anchor="middle" fill="#1E8449" font-size="11" font-family="Source Sans 3, sans-serif">Mode = most frequent = <tspan font-weight="700">admin</tspan></text>
+          </svg>
+        </div>
+      </div>
+
       <div class="grid-2">
         <div class="mini-card blue">
           <h4>Mean vs. Median?</h4>
@@ -423,10 +607,10 @@
   </div>
 
 
-  <!-- ==================== 2. ONE-HOT ENCODING ==================== -->
-  <div class="concept" id="s2">
+  <!-- ==================== 3. ONE-HOT ENCODING ==================== -->
+  <div class="concept" id="s3">
     <div class="concept-header">
-      <div class="concept-num">2</div>
+      <div class="concept-num">3</div>
       <h2>One-Hot Encoding</h2>
     </div>
     <div class="concept-body">
@@ -509,10 +693,10 @@
   </div>
 
 
-  <!-- ==================== 3. ORDINAL ENCODING ==================== -->
-  <div class="concept" id="s3">
+  <!-- ==================== 4. ORDINAL ENCODING ==================== -->
+  <div class="concept" id="s4">
     <div class="concept-header">
-      <div class="concept-num">3</div>
+      <div class="concept-num">4</div>
       <h2>Ordinal Encoding</h2>
     </div>
     <div class="concept-body">
@@ -555,10 +739,10 @@
   </div>
 
 
-  <!-- ==================== 4. FEATURE SCALING ==================== -->
-  <div class="concept" id="s4">
+  <!-- ==================== 5. FEATURE SCALING ==================== -->
+  <div class="concept" id="s5">
     <div class="concept-header">
-      <div class="concept-num">4</div>
+      <div class="concept-num">5</div>
       <h2>Feature Scaling</h2>
     </div>
     <div class="concept-body">
@@ -576,8 +760,8 @@
           <text x="110" y="83" fill="#5D6D7E" font-size="11" font-family="Source Sans 3, sans-serif">18 to 95</text>
 
           <text x="60" y="112" text-anchor="end" fill="#5D6D7E" font-size="12" font-family="Source Sans 3, sans-serif">balance</text>
-          <rect x="70" y="100" width="250" height="18" rx="3" fill="#E67E22" opacity="0.7"/>
-          <text x="330" y="113" fill="#5D6D7E" font-size="11" font-family="Source Sans 3, sans-serif">-8,019 to 102,127</text>
+          <rect x="70" y="100" width="230" height="18" rx="3" fill="#E67E22" opacity="0.7"/>
+          <text x="310" y="113" fill="#5D6D7E" font-size="11" font-family="Source Sans 3, sans-serif">-8,019 to 102,127</text>
 
           <text x="60" y="142" text-anchor="end" fill="#5D6D7E" font-size="12" font-family="Source Sans 3, sans-serif">campaign</text>
           <rect x="70" y="130" width="80" height="18" rx="3" fill="#27AE60" opacity="0.7"/>
@@ -624,10 +808,10 @@
   </div>
 
 
-  <!-- ==================== 5. SMOTE ==================== -->
-  <div class="concept" id="s5">
+  <!-- ==================== 6. SMOTE ==================== -->
+  <div class="concept" id="s6">
     <div class="concept-header">
-      <div class="concept-num">5</div>
+      <div class="concept-num">6</div>
       <h2>SMOTE</h2>
     </div>
     <div class="concept-body">
@@ -671,7 +855,7 @@
           <!-- Labels -->
           <text x="480" y="210" text-anchor="end" fill="#4A1A52" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">Point A</text>
           <text x="572" y="175" fill="#4A1A52" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">Point B</text>
-          <text x="530" y="196" fill="#E74C3C" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">new!</text>
+          <text x="525" y="210" fill="#E74C3C" font-weight="600" font-size="11" font-family="Source Sans 3, sans-serif">new!</text>
 
           <!-- Legend -->
           <circle cx="120" cy="330" r="6" fill="#BDC3C7" opacity="0.6"/>
@@ -701,10 +885,10 @@
   </div>
 
 
-  <!-- ==================== 6. DATA LEAKAGE ==================== -->
-  <div class="concept" id="s6">
+  <!-- ==================== 7. DATA LEAKAGE ==================== -->
+  <div class="concept" id="s7">
     <div class="concept-header">
-      <div class="concept-num">6</div>
+      <div class="concept-num">7</div>
       <h2>Data Leakage</h2>
     </div>
     <div class="concept-body">
@@ -765,10 +949,10 @@
   </div>
 
 
-  <!-- ==================== 7. PIPELINES ==================== -->
-  <div class="concept" id="s7">
+  <!-- ==================== 8. PIPELINES ==================== -->
+  <div class="concept" id="s8">
     <div class="concept-header">
-      <div class="concept-num">7</div>
+      <div class="concept-num">8</div>
       <h2>Pipelines &amp; ColumnTransformer</h2>
     </div>
     <div class="concept-body">
@@ -853,10 +1037,10 @@
   </div>
 
 
-  <!-- ==================== 8. QUICK REFERENCE TABLE ==================== -->
-  <div class="concept" id="s8">
+  <!-- ==================== 9. QUICK REFERENCE TABLE ==================== -->
+  <div class="concept" id="s9">
     <div class="concept-header">
-      <div class="concept-num">8</div>
+      <div class="concept-num">9</div>
       <h2>Quick Reference Table</h2>
     </div>
     <div class="concept-body">
@@ -930,7 +1114,7 @@
   <!-- SUMMARY -->
   <div class="summary-card">
     <h3>✓ Key Takeaway</h3>
-    <p>Every preprocessing step is a <strong>decision</strong>. The lecture and coursework will ask you to <strong>justify</strong> each choice by connecting it to what you found during exploration. This helper page gives you the vocabulary and visual intuition. The lecture will show you how to make and defend those decisions.</p>
+    <p>Every preprocessing step is a <strong>decision</strong>. This week aims to get you to develop <strong>justification</strong> for each choice, by connecting it to what you found during exploration. This helper page gives you the vocabulary and visual intuition.</p>
   </div>
 
 </div>
