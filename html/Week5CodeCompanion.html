@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5 Code Companion – CMM548</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #682773;
+    --purple-light: #F7ECF8;
+    --purple-mid: #9B59B6;
+    --purple-dark: #4A1A52;
+    --orange: #E67E22;
+    --orange-light: #FEF5EC;
+    --blue: #2980B9;
+    --blue-light: #EBF5FB;
+    --green: #27AE60;
+    --green-light: #EAFAF1;
+    --red: #E74C3C;
+    --red-light: #FDEDEC;
+    --text: #2C3E50;
+    --text-light: #5D6D7E;
+    --bg: #FAFBFC;
+    --card-bg: #FFFFFF;
+    --border: #E8E8E8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', -apple-system, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    font-size: 17px;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+  header .tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    color: #f0e0f4;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3em 1em;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  header p {
+    font-size: 1.05rem;
+    opacity: 0.88;
+    max-width: 640px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+  }
+
+  .intro-box {
+    background: var(--purple-light);
+    border-left: 4px solid var(--purple);
+    border-radius: 0 8px 8px 0;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.97rem;
+  }
+  .intro-box strong { color: var(--purple); }
+
+  .toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .toc h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    color: var(--purple);
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem 1.5rem;
+  }
+  .toc a {
+    color: var(--purple);
+    text-decoration: none;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0;
+  }
+  .toc a:hover { text-decoration: underline; }
+  .toc a .num {
+    background: var(--purple-light);
+    color: var(--purple);
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .concept {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .concept-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--purple-light);
+    border-bottom: 1px solid #EDE0F0;
+  }
+  .concept-num {
+    width: 36px; height: 36px;
+    background: var(--purple);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .concept-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--purple-dark);
+  }
+  .concept-body {
+    padding: 1.5rem;
+  }
+  .concept-body p { margin-bottom: 1rem; }
+
+  .key-term {
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    padding: 0.1em 0.45em;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  code {
+    font-family: 'Source Code Pro', monospace;
+    background: #F0EDF2;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.88em;
+    color: var(--purple-dark);
+  }
+
+  pre {
+    background: #1E1E2E;
+    color: #CDD6F4;
+    padding: 1.2rem 1.4rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 1rem 0;
+  }
+  pre .comment { color: #6C7086; }
+  pre .keyword { color: #CBA6F7; }
+  pre .string { color: #A6E3A1; }
+  pre .function { color: #89B4FA; }
+  pre .number { color: #FAB387; }
+  pre .output { color: #A6ADC8; font-style: italic; }
+
+  .example {
+    background: var(--green-light);
+    border-left: 4px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.3rem;
+    margin: 1rem 0;
+    font-size: 0.94rem;
+  }
+  .example strong { color: #1E8449; }
+
+  .warning {
+    background: var(--orange-light);
+    border-left: 4px solid var(--orange);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.3rem;
+    margin: 1rem 0;
+    font-size: 0.94rem;
+  }
+  .warning strong { color: #B7600A; }
+
+  .info {
+    background: var(--blue-light);
+    border-left: 4px solid var(--blue);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.3rem;
+    margin: 1rem 0;
+    font-size: 0.94rem;
+  }
+  .info strong { color: #1A5276; }
+
+  .danger {
+    background: var(--red-light);
+    border-left: 4px solid var(--red);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.3rem;
+    margin: 1rem 0;
+    font-size: 0.94rem;
+  }
+  .danger strong { color: #922B21; }
+
+  .doc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--purple-light);
+    color: var(--purple);
+    padding: 0.4em 0.9em;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0.2rem 0.2rem 0.2rem 0;
+    transition: background 0.15s;
+  }
+  .doc-link:hover { background: #EDD5F0; }
+  .doc-link::before { content: "📖"; font-size: 0.8rem; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+  }
+  th {
+    background: var(--purple);
+    color: white;
+    padding: 0.7rem 1rem;
+    text-align: left;
+    font-weight: 600;
+  }
+  td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:nth-child(even) td { background: var(--purple-light); }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .mini-card {
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    font-size: 0.93rem;
+  }
+  .mini-card h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .mini-card.green { background: var(--green-light); border: 1px solid #A9DFBF; }
+  .mini-card.green h4 { color: #1E8449; }
+  .mini-card.orange { background: var(--orange-light); border: 1px solid #F5CBA7; }
+  .mini-card.orange h4 { color: #B7600A; }
+  .mini-card.blue { background: var(--blue-light); border: 1px solid #AED6F1; }
+  .mini-card.blue h4 { color: #1A5276; }
+  .mini-card.red { background: var(--red-light); border: 1px solid #F5B7B1; }
+  .mini-card.red h4 { color: #922B21; }
+  .mini-card.purple { background: var(--purple-light); border: 1px solid #D7BDE2; }
+  .mini-card.purple h4 { color: var(--purple-dark); }
+
+  .try-it {
+    background: #FFFDE7;
+    border: 2px solid #F9E547;
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    margin: 1.2rem 0;
+    font-size: 0.94rem;
+  }
+  .try-it strong { color: #B8860B; }
+
+  .summary-card {
+    background: #FFFDE7;
+    border: 2px solid #F9E547;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  .summary-card h3 {
+    color: #B8860B;
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.6rem; }
+    .container { padding: 1.2rem 1rem; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">CMM548 · Week 5 Code Companion</div>
+  <h1>Understanding the Lab Code</h1>
+  <p>A guide to the scikit-learn patterns you'll use this week. Read this alongside the lab -- it explains what the code does and why, so you can adapt it for your own dataset.</p>
+</header>
+
+<div class="container">
+
+  <div class="intro-box">
+    <strong>How to use this document:</strong> This is not a line-by-line walkthrough of the lab. It explains the <em>patterns</em> and <em>building blocks</em> so you understand what each piece does and can modify it confidently. When you see a documentation link, open it and skim the parameters -- that's where the real learning happens.
+  </div>
+
+  <div class="toc">
+    <h3>Contents</h3>
+    <div class="toc-grid">
+      <a href="#s1"><span class="num">1</span> The Pipeline Pattern</a>
+      <a href="#s2"><span class="num">2</span> fit, predict, predict_proba</a>
+      <a href="#s3"><span class="num">3</span> Classifier Parameters</a>
+      <a href="#s4"><span class="num">4</span> Reading classification_report</a>
+      <a href="#s5"><span class="num">5</span> The Confusion Matrix</a>
+      <a href="#s6"><span class="num">6</span> ROC Curves and AUC</a>
+      <a href="#s7"><span class="num">7</span> Feature Weights</a>
+      <a href="#s8"><span class="num">8</span> Adapting for Your Dataset</a>
+    </div>
+  </div>
+
+
+  <!-- ==================== 1. PIPELINE ==================== -->
+  <div class="concept" id="s1">
+    <div class="concept-header">
+      <div class="concept-num">1</div>
+      <h2>The Pipeline Pattern</h2>
+    </div>
+    <div class="concept-body">
+      <p>Throughout this lab, every model is wrapped in a <span class="key-term">Pipeline</span>. A Pipeline chains processing steps together so that preprocessing and classification happen in a single object.</p>
+
+<pre><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline
+
+pipeline = Pipeline([
+    (<span class="string">'preprocessor'</span>, preprocessor),  <span class="comment"># your ColumnTransformer</span>
+    (<span class="string">'classifier'</span>, SomeClassifier())   <span class="comment"># any sklearn classifier</span>
+])
+</pre>
+
+      <p>Each step is a tuple: a name (any string you choose) and an object. The name lets you access the step later, for instance <code>pipeline.named_steps['classifier']</code> to get the trained model out.</p>
+
+      <div class="info">
+        <strong>Why not just preprocess separately?</strong> You <em>could</em> call <code>preprocessor.fit_transform(X_train)</code> and then feed the result to a classifier. Pipelines do the same thing but prevent a common mistake: accidentally fitting the preprocessor on the test set. When you call <code>pipeline.fit(X_train, y_train)</code>, only the training data touches <code>fit</code>. When you call <code>pipeline.predict(X_test)</code>, the test data only gets <code>transform</code>. This prevents data leakage automatically.
+      </div>
+
+      <a class="doc-link" href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html" target="_blank">sklearn Pipeline docs</a>
+
+      <div class="try-it">
+        <strong>Try it yourself:</strong> After fitting a pipeline, run <code>pipeline.named_steps</code> to see the dictionary of steps. Try accessing the classifier directly and inspecting its attributes (e.g. <code>pipeline.named_steps['classifier'].classes_</code>).
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== 2. FIT / PREDICT / PREDICT_PROBA ==================== -->
+  <div class="concept" id="s2">
+    <div class="concept-header">
+      <div class="concept-num">2</div>
+      <h2>fit, predict, predict_proba</h2>
+    </div>
+    <div class="concept-body">
+      <p>Every scikit-learn classifier has the same three core methods. Understanding what each one returns is essential.</p>
+
+      <table>
+        <tr><th>Method</th><th>What it does</th><th>Returns</th></tr>
+        <tr>
+          <td><code>.fit(X_train, y_train)</code></td>
+          <td>Learns from the training data</td>
+          <td>The fitted model itself (you can ignore this)</td>
+        </tr>
+        <tr>
+          <td><code>.predict(X_test)</code></td>
+          <td>Assigns a class label to each sample</td>
+          <td>1D array of predicted labels, e.g. <code>[0, 1, 0, 0, 1, ...]</code></td>
+        </tr>
+        <tr>
+          <td><code>.predict_proba(X_test)</code></td>
+          <td>Estimates probability of each class</td>
+          <td>2D array: one row per sample, one column per class</td>
+        </tr>
+      </table>
+
+      <p>The output of <code>predict_proba</code> looks like this:</p>
+
+<pre><span class="comment"># Two columns: P(class 0), P(class 1)</span>
+<span class="comment"># Each row sums to 1.0</span>
+array([[<span class="number">0.82</span>, <span class="number">0.18</span>],   <span class="comment"># sample 1: 82% likely class 0</span>
+       [<span class="number">0.35</span>, <span class="number">0.65</span>],   <span class="comment"># sample 2: 65% likely class 1</span>
+       [<span class="number">0.91</span>, <span class="number">0.09</span>],   <span class="comment"># sample 3: 91% likely class 0</span>
+       ...])
+</pre>
+
+      <p>When the lab code uses <code>y_prob[:, 1]</code>, it is extracting the second column -- the probability of the positive class. This is what ROC curves and AUC need.</p>
+
+      <div class="warning">
+        <strong>Which column is which?</strong> The columns follow the order in <code>classifier.classes_</code>. If your target is encoded as 0/1, column 0 is P(no) and column 1 is P(yes). If your target uses strings like <code>'yes'</code>/<code>'no'</code>, check <code>classes_</code> to confirm the order -- it's alphabetical, so <code>'no'</code> would be column 0 and <code>'yes'</code> column 1.
+      </div>
+
+      <div class="try-it">
+        <strong>Try it yourself:</strong> After training any model, run <code>pipeline.named_steps['classifier'].classes_</code> to see the class order. Then compare a few rows of <code>predict_proba</code> output with the corresponding <code>predict</code> output. Can you see how the predicted label matches the column with the higher probability?
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== 3. CLASSIFIER PARAMETERS ==================== -->
+  <div class="concept" id="s3">
+    <div class="concept-header">
+      <div class="concept-num">3</div>
+      <h2>Classifier Parameters</h2>
+    </div>
+    <div class="concept-body">
+      <p>Each classifier in the lab is created with specific parameters. You don't need to memorise them all, but you should understand what the important ones do and where to look them up.</p>
+
+      <table>
+        <tr><th>Classifier</th><th>Key parameters in the lab</th><th>What to explore</th></tr>
+        <tr>
+          <td><code>GaussianNB()</code></td>
+          <td>None set (defaults are fine)</td>
+          <td><code>var_smoothing</code> -- controls smoothing</td>
+        </tr>
+        <tr>
+          <td><code>LogisticRegression()</code></td>
+          <td><code>C=1.0</code>, <code>penalty='l2'</code>, <code>max_iter=1000</code></td>
+          <td>Try changing <code>C</code> (0.01, 0.1, 10). What happens?</td>
+        </tr>
+        <tr>
+          <td><code>KNeighborsClassifier()</code></td>
+          <td><code>n_neighbors=5</code>, <code>weights='uniform'</code></td>
+          <td>Try <code>weights='distance'</code>. Try k=3 vs k=20.</td>
+        </tr>
+        <tr>
+          <td><code>SVC()</code></td>
+          <td><code>kernel='rbf'</code>, <code>C=1.0</code>, <code>gamma='scale'</code></td>
+          <td>Try <code>kernel='linear'</code>. How does speed change?</td>
+        </tr>
+      </table>
+
+      <div class="info">
+        <strong>Where do I find all the parameters?</strong> The documentation pages list every parameter with its default value and meaning. The "User Guide" pages (linked below) explain the concepts; the "API Reference" pages give the technical details.
+      </div>
+
+      <p>
+        <a class="doc-link" href="https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html" target="_blank">GaussianNB</a>
+        <a class="doc-link" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html" target="_blank">LogisticRegression</a>
+        <a class="doc-link" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html" target="_blank">KNeighborsClassifier</a>
+        <a class="doc-link" href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html" target="_blank">SVC</a>
+      </p>
+
+      <p>Conceptual guides (often more helpful than the API pages):</p>
+      <p>
+        <a class="doc-link" href="https://scikit-learn.org/stable/modules/naive_bayes.html" target="_blank">Naive Bayes guide</a>
+        <a class="doc-link" href="https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression" target="_blank">Logistic Regression guide</a>
+        <a class="doc-link" href="https://scikit-learn.org/stable/modules/neighbors.html" target="_blank">k-NN guide</a>
+        <a class="doc-link" href="https://scikit-learn.org/stable/modules/svm.html" target="_blank">SVM guide</a>
+      </p>
+
+      <div class="try-it">
+        <strong>Try it yourself:</strong> Pick one classifier and change one parameter. Re-run the pipeline and compare the classification report to the original. Can you explain why the results changed? This kind of experimentation is exactly what the grading grid rewards at Grade B and above.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== 4. CLASSIFICATION REPORT ==================== -->
+  <div class="concept" id="s4">
+    <div class="concept-header">
+      <div class="concept-num">4</div>
+      <h2>Reading classification_report</h2>
+    </div>
+    <div class="concept-body">
+      <p>The <code>classification_report</code> function prints a table that looks like this:</p>
+
+<pre><span class="output">              precision    recall  f1-score   support
+
+           0       0.94      0.85      0.89      7985
+           1       0.35      0.61      0.44      1058
+
+    accuracy                           0.82      9043
+   macro avg       0.65      0.73      0.67      9043
+weighted avg       0.87      0.82      0.84      9043</span>
+</pre>
+
+      <p>Here's what each column means:</p>
+
+      <table>
+        <tr><th>Column</th><th>Question it answers</th><th>Formula</th></tr>
+        <tr>
+          <td><strong>Precision</strong></td>
+          <td>"Of all the samples I <em>predicted</em> as this class, how many actually were?"</td>
+          <td>TP / (TP + FP)</td>
+        </tr>
+        <tr>
+          <td><strong>Recall</strong></td>
+          <td>"Of all the samples that <em>actually are</em> this class, how many did I find?"</td>
+          <td>TP / (TP + FN)</td>
+        </tr>
+        <tr>
+          <td><strong>F1-score</strong></td>
+          <td>"A single number balancing precision and recall"</td>
+          <td>2 &times; (P &times; R) / (P + R)</td>
+        </tr>
+        <tr>
+          <td><strong>Support</strong></td>
+          <td>"How many samples of this class are in the test set?"</td>
+          <td>Count</td>
+        </tr>
+      </table>
+
+      <div class="warning">
+        <strong>Which row matters?</strong> For imbalanced datasets like Bank Marketing, the <strong>minority class row</strong> (class 1) is the one to focus on. The majority class will almost always look good because the model sees many more examples of it. Your coursework analysis should discuss the minority class metrics specifically.
+      </div>
+
+      <p>The bottom rows are averages:</p>
+      <div class="grid-2">
+        <div class="mini-card blue">
+          <h4>macro avg</h4>
+          Simple average of both classes. Treats them equally regardless of size.
+        </div>
+        <div class="mini-card purple">
+          <h4>weighted avg</h4>
+          Weighted by support (class size). Can hide poor minority-class performance.
+        </div>
+      </div>
+
+      <a class="doc-link" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html" target="_blank">classification_report docs</a>
+
+      <div class="try-it">
+        <strong>Try it yourself:</strong> Look at the classification report for any of your models. Calculate the F1-score by hand from the precision and recall values. Does it match? Now look at the accuracy line. Could a model that predicts "no" for everything achieve a similar accuracy on this dataset?
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== 5. CONFUSION MATRIX ==================== -->
+  <div class="concept" id="s5">
+    <div class="concept-header">
+      <div class="concept-num">5</div>
+      <h2>The Confusion Matrix</h2>
+    </div>
+    <div class="concept-body">
+      <p>A confusion matrix is a 2&times;2 grid (for binary classification) showing exactly where the model gets things right and wrong. Scikit-learn's <code>ConfusionMatrixDisplay</code> draws it for you, but you need to know how to read it.</p>
+
+      <div class="visual-panel">
+        <svg viewBox="0 0 480 340" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;">
+          <!-- Title -->
+          <text x="280" y="24" text-anchor="middle" fill="#2C3E50" font-weight="700" font-size="15" font-family="Source Sans 3, sans-serif">Confusion Matrix Layout</text>
+
+          <!-- Axis labels -->
+          <text x="280" y="56" text-anchor="middle" fill="#5D6D7E" font-weight="600" font-size="12" font-family="Source Sans 3, sans-serif">Predicted label</text>
+          <text x="60" y="190" text-anchor="middle" fill="#5D6D7E" font-weight="600" font-size="12" font-family="Source Sans 3, sans-serif" transform="rotate(-90, 60, 190)">True label</text>
+
+          <!-- Column headers -->
+          <text x="210" y="80" text-anchor="middle" fill="#2C3E50" font-weight="600" font-size="12" font-family="Source Sans 3, sans-serif">0 (no)</text>
+          <text x="350" y="80" text-anchor="middle" fill="#2C3E50" font-weight="600" font-size="12" font-family="Source Sans 3, sans-serif">1 (yes)</text>
+
+          <!-- Row headers -->
+          <text x="105" y="150" text-anchor="middle" fill="#2C3E50" font-weight="600" font-size="12" font-family="Source Sans 3, sans-serif">0 (no)</text>
+          <text x="105" y="250" text-anchor="middle" fill="#2C3E50" font-weight="600" font-size="12" font-family="Source Sans 3, sans-serif">1 (yes)</text>
+
+          <!-- Cells -->
+          <!-- TN -->
+          <rect x="140" y="95" width="140" height="80" rx="8" fill="#EAFAF1" stroke="#27AE60" stroke-width="2"/>
+          <text x="210" y="135" text-anchor="middle" fill="#1E8449" font-weight="700" font-size="14" font-family="Source Sans 3, sans-serif">True Negative</text>
+          <text x="210" y="155" text-anchor="middle" fill="#1E8449" font-size="11" font-family="Source Sans 3, sans-serif">Correctly said "no"</text>
+
+          <!-- FP -->
+          <rect x="280" y="95" width="140" height="80" rx="8" fill="#FEF5EC" stroke="#E67E22" stroke-width="2"/>
+          <text x="350" y="135" text-anchor="middle" fill="#B7600A" font-weight="700" font-size="14" font-family="Source Sans 3, sans-serif">False Positive</text>
+          <text x="350" y="155" text-anchor="middle" fill="#B7600A" font-size="11" font-family="Source Sans 3, sans-serif">False alarm</text>
+
+          <!-- FN -->
+          <rect x="140" y="195" width="140" height="80" rx="8" fill="#FDEDEC" stroke="#E74C3C" stroke-width="2"/>
+          <text x="210" y="235" text-anchor="middle" fill="#922B21" font-weight="700" font-size="14" font-family="Source Sans 3, sans-serif">False Negative</text>
+          <text x="210" y="255" text-anchor="middle" fill="#922B21" font-size="11" font-family="Source Sans 3, sans-serif">Missed subscriber</text>
+
+          <!-- TP -->
+          <rect x="280" y="195" width="140" height="80" rx="8" fill="#EAFAF1" stroke="#27AE60" stroke-width="2"/>
+          <text x="350" y="235" text-anchor="middle" fill="#1E8449" font-weight="700" font-size="14" font-family="Source Sans 3, sans-serif">True Positive</text>
+          <text x="350" y="255" text-anchor="middle" fill="#1E8449" font-size="11" font-family="Source Sans 3, sans-serif">Correctly found</text>
+
+          <!-- Diagonal annotation -->
+          <text x="280" y="310" text-anchor="middle" fill="#5D6D7E" font-size="11" font-family="Source Sans 3, sans-serif">The green diagonal = correct predictions. Off-diagonal = errors.</text>
+        </svg>
+      </div>
+
+      <p>In the lab, <code>ConfusionMatrixDisplay.from_predictions(y_test, y_pred)</code> draws this grid with the actual counts filled in. The <code>cmap='Purples'</code> parameter controls the colour scale -- darker cells have higher counts.</p>
+
+      <div class="example">
+        <strong>Bank Marketing example:</strong> If the bottom-left cell (False Negatives) shows 400, that means 400 actual subscribers were missed by the model. If the top-right cell (False Positives) shows 800, that means 800 non-subscribers would receive unnecessary phone calls. Which matters more depends on the bank's priorities (Week 1).
+      </div>
+
+      <a class="doc-link" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ConfusionMatrixDisplay.html" target="_blank">ConfusionMatrixDisplay docs</a>
+      <a class="doc-link" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html" target="_blank">confusion_matrix docs</a>
+    </div>
+  </div>
+
+
+  <!-- ==================== 6. ROC / AUC ==================== -->
+  <div class="concept" id="s6">
+    <div class="concept-header">
+      <div class="concept-num">6</div>
+      <h2>ROC Curves and AUC</h2>
+    </div>
+    <div class="concept-body">
+      <p>The lab plots <span class="key-term">ROC curves</span> for all four models on one chart. Here's what the code is actually doing:</p>
+
+<pre><span class="comment"># For each model:</span>
+fpr, tpr, thresholds = <span class="function">roc_curve</span>(y_test, y_prob[:, <span class="number">1</span>], pos_label=<span class="number">1</span>)
+</pre>
+
+      <p><code>roc_curve</code> takes the true labels and the predicted <em>probabilities</em> (not the predicted labels). It then sweeps through every possible threshold and, at each one, calculates:</p>
+
+      <div class="grid-2">
+        <div class="mini-card blue">
+          <h4>False Positive Rate (x-axis)</h4>
+          Of the actual negatives, what fraction did the model incorrectly flag?
+        </div>
+        <div class="mini-card green">
+          <h4>True Positive Rate (y-axis)</h4>
+          Of the actual positives, what fraction did the model correctly find? (This is recall.)
+        </div>
+      </div>
+
+      <p>Each point on the curve corresponds to a different classification threshold. The default threshold of 0.5 is just one point on this curve -- not necessarily the best one.</p>
+
+      <p><span class="key-term">AUC</span> (Area Under the Curve) summarises the entire curve as a single number between 0 and 1. An AUC of 0.5 means the model is no better than random. An AUC of 1.0 means perfect separation.</p>
+
+      <div class="warning">
+        <strong>pos_label matters:</strong> The <code>pos_label</code> parameter tells <code>roc_curve</code> which class is "positive". If your target is 0/1, use <code>pos_label=1</code>. If it is <code>'yes'</code>/<code>'no'</code>, use <code>pos_label='yes'</code>. Getting this wrong will flip the curve.
+      </div>
+
+      <a class="doc-link" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html" target="_blank">roc_curve docs</a>
+      <a class="doc-link" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html" target="_blank">roc_auc_score docs</a>
+      <a class="doc-link" href="https://scikit-learn.org/stable/modules/model_evaluation.html#roc-metrics" target="_blank">ROC conceptual guide</a>
+    </div>
+  </div>
+
+
+  <!-- ==================== 7. FEATURE WEIGHTS ==================== -->
+  <div class="concept" id="s7">
+    <div class="concept-header">
+      <div class="concept-num">7</div>
+      <h2>Feature Weights</h2>
+    </div>
+    <div class="concept-body">
+      <p>The lab extracts Logistic Regression's learned coefficients with <code>lr_pipeline.named_steps['classifier'].coef_[0]</code>. Here's what this gives you and why it matters.</p>
+
+      <p>After fitting, Logistic Regression stores a weight for every input feature. The prediction for a single sample is (roughly): multiply each feature value by its weight, sum the results, and pass through the sigmoid function. A positive weight means the feature pushes the prediction toward class 1 (yes). A negative weight pushes toward class 0 (no).</p>
+
+      <div class="danger">
+        <strong>Feature names must match:</strong> The weights in <code>.coef_[0]</code> are in the same order as the features that come out of the preprocessor. If you use <code>preprocessor.get_feature_names_out()</code> or build the names manually (as in the Week 4 notebook), you need to make sure the ordering is consistent. Mismatched names will lead to completely wrong interpretations.
+      </div>
+
+      <div class="info">
+        <strong>Only Logistic Regression has this.</strong> Of the four models in this lab, only Logistic Regression offers directly interpretable weights. Naive Bayes has class-conditional probabilities (accessed via <code>.theta_</code> and <code>.var_</code>), but they are harder to interpret. k-NN and SVM (with RBF kernel) have no equivalent -- they are essentially "black box" models. This is a genuine trade-off: you may sacrifice some accuracy for the ability to explain your model's decisions.
+      </div>
+
+      <div class="try-it">
+        <strong>Try it yourself:</strong> Sort the weight DataFrame by absolute value instead of raw value. Which features have the largest <em>magnitude</em> regardless of direction? These are the features the model relies on most. Do they align with what you found in Week 3's EDA?
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== 8. ADAPTING ==================== -->
+  <div class="concept" id="s8">
+    <div class="concept-header">
+      <div class="concept-num">8</div>
+      <h2>Adapting for Your Dataset</h2>
+    </div>
+    <div class="concept-body">
+      <p>The lab code is written for Bank Marketing. When you apply it to your own coursework dataset, a few things will need to change. Here's a checklist.</p>
+
+      <table>
+        <tr><th>What to check</th><th>Where in the code</th><th>What to change</th></tr>
+        <tr>
+          <td>Target encoding</td>
+          <td><code>pos_label=</code> in metrics</td>
+          <td>Match your target values. If you used <code>.map({'yes': 1, 'no': 0})</code>, use <code>pos_label=1</code>. If strings, use the string.</td>
+        </tr>
+        <tr>
+          <td>Column indices</td>
+          <td><code>y_prob[:, 1]</code></td>
+          <td>Column 1 assumes the positive class is second in <code>.classes_</code>. Verify this.</td>
+        </tr>
+        <tr>
+          <td>Preprocessor</td>
+          <td><code>Pipeline([('preprocessor', preprocessor), ...])</code></td>
+          <td>Use your own <code>ColumnTransformer</code> from Week 4, fitted to your own feature types.</td>
+        </tr>
+        <tr>
+          <td>Feature names</td>
+          <td><code>all_feature_names</code> in the weight plot</td>
+          <td>Rebuild from your preprocessor's output. The ordering must match <code>.coef_[0]</code>.</td>
+        </tr>
+        <tr>
+          <td>Class imbalance</td>
+          <td><code>class_weight='balanced'</code></td>
+          <td>Only needed if your dataset is imbalanced. Check your class distribution first.</td>
+        </tr>
+      </table>
+
+      <div class="warning">
+        <strong>Don't change everything at once.</strong> Get one model working on your dataset first (Logistic Regression is a good choice -- it's fast and you can inspect the weights). Once that works, add the others. Debugging four broken pipelines simultaneously is much harder than fixing one.
+      </div>
+
+      <div class="try-it">
+        <strong>Try it yourself:</strong> Before running any classifier on your own dataset, run <code>print(y_train.value_counts())</code> and <code>print(y_train.dtype)</code>. These two lines will tell you whether you need <code>class_weight='balanced'</code> and what to put for <code>pos_label</code>.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== SUMMARY ==================== -->
+  <div class="summary-card">
+    <h3>Quick Reference: The Lab in Five Steps</h3>
+    <p>
+      <strong>1. Build a Pipeline</strong> with your preprocessor and a classifier.<br>
+      <strong>2. Call <code>.fit(X_train, y_train)</code></strong> to train.<br>
+      <strong>3. Call <code>.predict(X_test)</code></strong> for labels and <code>.predict_proba(X_test)</code> for probabilities.<br>
+      <strong>4. Evaluate</strong> with <code>classification_report</code>, confusion matrices, and ROC curves.<br>
+      <strong>5. Compare and reflect</strong> -- the analysis is where the marks are.
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  CMM548 Machine Learning · Sophie Haynes · Robert Gordon University · Semester 2, 2026
+</footer>
+
+</body>
+</html>
