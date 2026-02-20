@@ -345,13 +345,13 @@
 <header>
   <div class="tag">CMM548 · Week 5 Code Companion</div>
   <h1>Understanding the Lab Code</h1>
-  <p>A guide to the scikit-learn patterns you'll use this week. Read this alongside the lab -- it explains what the code does and why, so you can adapt it for your own dataset.</p>
+  <p>A guide to the scikit-learn patterns you'll use this week. Read this alongside the lab, as it explains what the code does and why, so you can adapt it for your own dataset.</p>
 </header>
 
 <div class="container">
 
   <div class="intro-box">
-    <strong>How to use this document:</strong> This is not a line-by-line walkthrough of the lab. It explains the <em>patterns</em> and <em>building blocks</em> so you understand what each piece does and can modify it confidently. When you see a documentation link, open it and skim the parameters -- that's where the real learning happens.
+    <strong>How to use this document:</strong> This is not a line-by-line walkthrough of the lab. It explains the <em>patterns</em> and <em>building blocks</em> so you understand what each piece does and can modify it confidently. When you see a documentation link, open it and skim the parameters; that's where real learning happens!
   </div>
 
   <div class="toc">
@@ -439,10 +439,10 @@ array([[<span class="number">0.82</span>, <span class="number">0.18</span>],   <
        ...])
 </pre>
 
-      <p>When the lab code uses <code>y_prob[:, 1]</code>, it is extracting the second column -- the probability of the positive class. This is what ROC curves and AUC need.</p>
+      <p>When the lab code uses <code>y_prob[:, 1]</code>, it is extracting the second column (the probability of the positive class). This is what ROC curves and AUC need.</p>
 
       <div class="warning">
-        <strong>Which column is which?</strong> The columns follow the order in <code>classifier.classes_</code>. If your target is encoded as 0/1, column 0 is P(no) and column 1 is P(yes). If your target uses strings like <code>'yes'</code>/<code>'no'</code>, check <code>classes_</code> to confirm the order -- it's alphabetical, so <code>'no'</code> would be column 0 and <code>'yes'</code> column 1.
+        <strong>Which column is which?</strong> The columns follow the order in <code>classifier.classes_</code>. If your target is encoded as 0/1, column 0 is P(no) and column 1 is P(yes). If your target uses strings like <code>'yes'</code>/<code>'no'</code>, check <code>classes_</code> to confirm the order (it's alphabetical), so <code>'no'</code> would be column 0 and <code>'yes'</code> column 1.
       </div>
 
       <div class="try-it">
@@ -633,7 +633,7 @@ weighted avg       0.87      0.82      0.84      9043</span>
         </svg>
       </div>
 
-      <p>In the lab, <code>ConfusionMatrixDisplay.from_predictions(y_test, y_pred)</code> draws this grid with the actual counts filled in. The <code>cmap='Purples'</code> parameter controls the colour scale -- darker cells have higher counts.</p>
+      <p>In the lab, <code>ConfusionMatrixDisplay.from_predictions(y_test, y_pred)</code> draws this grid with the actual counts filled in. The <code>cmap='Purples'</code> parameter controls the colour scale, where the darker cells have higher counts.</p>
 
       <div class="example">
         <strong>Bank Marketing example:</strong> If the bottom-left cell (False Negatives) shows 400, that means 400 actual subscribers were missed by the model. If the top-right cell (False Positives) shows 800, that means 800 non-subscribers would receive unnecessary phone calls. Which matters more depends on the bank's priorities (Week 1).
@@ -671,7 +671,7 @@ fpr, tpr, thresholds = <span class="function">roc_curve</span>(y_test, y_prob[:,
         </div>
       </div>
 
-      <p>Each point on the curve corresponds to a different classification threshold. The default threshold of 0.5 is just one point on this curve -- not necessarily the best one.</p>
+      <p>Each point on the curve corresponds to a different classification threshold. The default threshold of 0.5 is just one point on this curve, which is not necessarily the best one.</p>
 
       <p><span class="key-term">AUC</span> (Area Under the Curve) summarises the entire curve as a single number between 0 and 1. An AUC of 0.5 means the model is no better than random. An AUC of 1.0 means perfect separation.</p>
 
@@ -702,7 +702,7 @@ fpr, tpr, thresholds = <span class="function">roc_curve</span>(y_test, y_prob[:,
       </div>
 
       <div class="info">
-        <strong>Only Logistic Regression has this.</strong> Of the four models in this lab, only Logistic Regression offers directly interpretable weights. Naive Bayes has class-conditional probabilities (accessed via <code>.theta_</code> and <code>.var_</code>), but they are harder to interpret. k-NN and SVM (with RBF kernel) have no equivalent -- they are essentially "black box" models. This is a genuine trade-off: you may sacrifice some accuracy for the ability to explain your model's decisions.
+        <strong>Only Logistic Regression has this.</strong> Of the four models in this lab, only Logistic Regression offers directly interpretable weights. Naive Bayes has class-conditional probabilities (accessed via <code>.theta_</code> and <code>.var_</code>), but they are harder to interpret. k-NN and SVM (with RBF kernel) have no equivalent, as they are essentially "black box" models. This is a genuine trade-off as you may sacrifice some accuracy to gain the ability to explain your model's decisions.
       </div>
 
       <div class="try-it">
@@ -751,7 +751,7 @@ fpr, tpr, thresholds = <span class="function">roc_curve</span>(y_test, y_prob[:,
       </table>
 
       <div class="warning">
-        <strong>Don't change everything at once.</strong> Get one model working on your dataset first (Logistic Regression is a good choice -- it's fast and you can inspect the weights). Once that works, add the others. Debugging four broken pipelines simultaneously is much harder than fixing one.
+        <strong>Don't change everything at once.</strong> Get one model working on your dataset first (Logistic Regression is a good choice since it's fast and you can inspect the weights). Once that works, add the others. Debugging four broken pipelines simultaneously is much harder than fixing one.
       </div>
 
       <div class="try-it">
@@ -769,7 +769,7 @@ fpr, tpr, thresholds = <span class="function">roc_curve</span>(y_test, y_prob[:,
       <strong>2. Call <code>.fit(X_train, y_train)</code></strong> to train.<br>
       <strong>3. Call <code>.predict(X_test)</code></strong> for labels and <code>.predict_proba(X_test)</code> for probabilities.<br>
       <strong>4. Evaluate</strong> with <code>classification_report</code>, confusion matrices, and ROC curves.<br>
-      <strong>5. Compare and reflect</strong> -- the analysis is where the marks are.
+      <strong>5. Compare and reflect</strong> because the analysis is where the marks are.
     </p>
   </div>
 
