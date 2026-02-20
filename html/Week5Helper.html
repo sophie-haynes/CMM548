@@ -730,7 +730,7 @@
       <h2>SVM &amp; the Maximum Margin</h2>
     </div>
     <div class="concept-body">
-      <p>A <span class="key-term">Support Vector Machine</span> finds the decision boundary that maximises the <strong>margin</strong>: the gap between the boundary and the closest points from each class. Those closest points are the <em>support vectors</em>.</p>
+      <p>A <span class="key-term">Support Vector Machine</span> finds the decision boundary that maximises the <strong>margin</strong> (the gap between the boundary and the closest points from each class - see the purple section in the diagram below). Those closest points are the <em>support vectors</em> (points with dark orange outline in the diagram below).</p>
 
       <div class="visual-panel">
         <svg viewBox="0 0 780 280" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;">
@@ -795,7 +795,7 @@
         </svg>
       </div>
 
-      <p>The key idea: a wider margin usually means better generalisation to new data. Only the support vectors matter for the boundary. All other points could move freely without changing it.</p>
+      <p>The core idea is that a <em>wider margin</em> usually leads to <em>better generalisation</em> to new data. Only the support vectors matter for the boundary, all other points could move freely without changing it.</p>
 
       <div class="grid-2">
         <div class="mini-card purple">
@@ -804,7 +804,8 @@
         </div>
         <div class="mini-card orange">
           <h4>Key hyperparameters</h4>
-          <strong>C:</strong> trade-off between wide margin and correct training classification. High C = narrow margin, may overfit. <strong>gamma</strong> (RBF): how far each point's influence reaches. High gamma = complex boundary, may overfit.
+          <strong>C:</strong> trade-off between wide margin and correct training classification. 
+          High C = narrow margin, may overfit. <strong>gamma</strong> (RBF): how far each point's influence reaches. High gamma = complex boundary, may overfit.
         </div>
       </div>
     </div>
@@ -845,7 +846,7 @@
           <circle cx="215" cy="145" r="7" fill="#E67E22" opacity="0.6"/>
 
           <!-- Coloured description at bottom of box -->
-          <text x="212" y="273" text-anchor="middle" fill="#922B21" font-size="11" font-family="Source Sans 3, sans-serif">age differences invisible next to</text>
+          <text x="212" y="273" text-anchor="middle" fill="#922B21" font-size="11" font-family="Source Sans 3, sans-serif">Age differences invisible next to</text>
           <text x="212" y="288" text-anchor="middle" fill="#922B21" font-size="11" font-family="Source Sans 3, sans-serif">balance differences</text>
 
           <!-- RIGHT: Scaled -->
@@ -896,7 +897,7 @@
       <h2>Evaluation Metrics</h2>
     </div>
     <div class="concept-body">
-      <p>Accuracy alone is misleading for imbalanced datasets. These metrics give you a fuller picture of how well your model performs, especially for the minority class.</p>
+      <p>Accuracy alone is misleading for imbalanced datasets. These metrics give you a fuller picture of how well your model performs, especially for the minority class. Wikipedia has a <a href="https://en.wikipedia.org/wiki/Precision_and_recall">helpful visualisation</a> for intuitively understanding the difference between precision and recall.</p>
 
       <div class="visual-panel">
         <svg viewBox="0 0 740 360" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;">
